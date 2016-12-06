@@ -28,6 +28,6 @@ When you start a container of this docker image, it runs the **run.sh** script, 
 
 ODK provides an installer, when you run the installer, you are required to input information that correspond to the env vars mentioned above.
 
-The installer takes the input and put it in properties files, then put the properties files in a jar file, then put that jar and put it in a war file. The war file is the final output of the installer.
+The installer takes the input and put it in properties files, then put the properties files in a jar file, then put that jar in a war file. The war file is the final output of the installer.
 
 When starting a docker container, we can not run the installer, since it has **GUI**. So the image packages in a pre-generated war file, then at run time explode the war, replace strings in properties files with the env vars, then reassembles the war file.
