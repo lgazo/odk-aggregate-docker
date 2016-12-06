@@ -19,7 +19,7 @@ POSTGRES_PASSWORD
 
 For example, you can run it like this:
 ```
-docker run -p 8080:8080 --env-file .env odk
+docker run -p 8080:8080 --env-file .env cuipengfei/odk-aggregate
 ```
 
 The .env file should contain all env vars listed above.
