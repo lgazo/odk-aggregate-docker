@@ -1,5 +1,3 @@
-# odk-aggregate-docker
-ODK aggregate docker
 
 # Version
 
@@ -22,7 +20,7 @@ For example, you can run it like this:
 docker run -p 8080:8080 --env-file .env cuipengfei/odk-aggregate
 ```
 
-The .env file should contain all env vars listed above.
+The .env file should contain all env vars listed above. You can refer to the .env file in this repo as template.
 
 # The tricks
 
