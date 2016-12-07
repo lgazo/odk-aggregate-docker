@@ -1,7 +1,7 @@
 
 # Version
 
-This docker images uses ODK Aggregate **1.4.12**.
+This docker images uses ODK Aggregate **1.4.12** from: https://opendatakit.org/downloads/download-info/odk-aggregate-osx-installer-app-zip/
 
 # Required env vars
 This docker image requires the following environment variables to function properly:
