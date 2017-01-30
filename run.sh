@@ -12,17 +12,26 @@ if [ ! -f /finished-setup ]; then
   pushd /odksettingstmp
   jar -xvf /odktmp/WEB-INF/lib/ODKAggregate-settings.jar
 
+  echo "---- Environment Variables ----"
+  echo "ODK_PORT=$ODK_PORT"
+  echo "ODK_PORT_SECURE=$ODK_PORT_SECURE"
+  echo "ODK_HOSTNAME=$ODK_HOSTNAME"
+  echo "ODK_ADMIN_USER=$ODK_ADMIN_USER"
+  echo "ODK_ADMIN_USERNAME=$ODK_ADMIN_USERNAME"
+  echo "ODK_AUTH_REALM=$ODK_AUTH_REALM"
+  echo "ODK_CHANNEL_TYPE=$ODK_CHANNEL_TYPE"
+  echo "DATABASE_URL=$DATABASE_URL"
+  echo "POSTGRES_USER=$POSTGRES_USER"
+  echo "CATALINA_HOME=$CATALINA_HOME"
+
   echo "---- Modifying ODK Aggregate security.properties ----"
-
-  echo "Updating security.server.hostname"
-  sed -i -E "s|^(security.server.hostname=).*|\1$ODK_HOSTNAME|gm" security.properties
-
-  echo "Updating security.server.superUserUsername"
-  sed -i -E "s|^(security.server.superUserUsername=).*|\1$ODK_ADMIN_USERNAME|gm" security.properties
-
-  echo "Updating security.server.realm.realmString"
-  sed -i -E "s|^(security.server.realm.realmString=).*|\1$ODK_AUTH_REALM|gm" security.properties
-
+  [[ ! -z $ODK_PORT ]] && echo "Updating security.server.port" && sed -i -E "s|^(security.server.port=)([0-9]+)|\1$ODK_PORT|gm" security.properties
+  [[ ! -z $ODK_PORT_SECURE ]] && echo "Updating security.server.securePort" && sed -i -E "s|^(security.server.securePort=)([0-9]+)|\1$ODK_PORT_SECURE|gm" security.properties
+  [[ ! -z $ODK_HOSTNAME ]] && echo "Updating security.server.hostname" && sed -i -E "s|^(security.server.hostname=)([A-Za-z\.0-9_]+)|\1$ODK_HOSTNAME|gm" security.properties
+  [[ ! -z $ODK_ADMIN_USER ]] && echo "Updating security.server.superUser" && sed -i -E "s|^(security.server.superUser=).*|\1$ODK_ADMIN_USER|gm" security.properties
+  [[ ! -z $ODK_ADMIN_USERNAME ]] && echo "Updating security.server.superUserUsername" && sed -i -E "s|^(security.server.superUserUsername=).*|\1$ODK_ADMIN_USERNAME|gm" security.properties
+  [[ ! -z $ODK_AUTH_REALM ]] && echo "Updating security.server.realm.realmString" && sed -i -E "s|^(security.server.realm.realmString=).*|\1$ODK_AUTH_REALM|gm" security.properties
+  [[ ! -z $ODK_CHANNEL_TYPE ]] && echo "Updating security.server.channelType" && sed -i -E "s|^(security.server.channelType=).*|\1$ODK_CHANNEL_TYPE|gm" security.properties
   cp security.properties ~/
 
   echo "---- Modifying ODK Aggregate jdbc.properties ----"
